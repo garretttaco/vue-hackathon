@@ -1,16 +1,29 @@
 <template>
-<div class="modal">
-  <div class="model-content">
-    Content here    
+<div v-if="showModal" :class="$style.overlay">
+  <div :class="$style.modal">
+    <div :class="$style.modelContent">
+      <slot></slot>
+    </div>
+    <div v-on:click="$emit('hideModal')" :class="$style.closeButton"><button>Close</button></div>
   </div>
 </div>
 </template>
 
+<script>
+export default {
+  name: "Modal",
+  props: {
+    show: {
+      type: Boolean,
+    },
+  },
+};
+</script>
 
-<style scoped>
+
+<style module lang="scss">
 /* The Modal (background) */
-.modal {
-  display: none; /* Hidden by default */
+.overlay {
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
   left: 0;
@@ -23,7 +36,7 @@
 }
 
 /* Modal Content/Box */
-.modal-content {
+.modal {
   background-color: #fefefe;
   margin: 15% auto; /* 15% from the top and centered */
   padding: 20px;
@@ -31,18 +44,14 @@
   width: 80%; /* Could be more or less, depending on screen size */
 }
 
-/* The Close Button */
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
+.modalContent {
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
 }
 
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
+.closeButton {
+  text-align: right;
 }
 </style>

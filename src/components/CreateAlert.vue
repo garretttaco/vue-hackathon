@@ -1,19 +1,40 @@
 <template>
   <div>
-    <button v-html="buttonName"></button>
+    <button>Create alert</button>
+    <Modal v-on:hideModal="toggleModal" show="showModal">
+      <div>
+        <Rules />
+        <AddRule />
+      </div>
+  </Modal>
   </div>
 </template>
 
 <script>
 import subjects from "../mock/subjects";
 import operators from "../mock/operators";
+import Modal from "./Modal";
+import Rules from "./Rules";
+import AddRule from "./AddRule";
+
 export default {
   name: "CreateAlert",
   props: ["buttonName"],
+  components: {
+    Rules,
+    AddRule,
+    Modal,
+  },
+  methods: {
+    toggleModal: function() {
+      this.showModal = !this.showModal;
+    },
+  },
   data() {
     return {
       operators,
       subjects,
+      showModal: true,
     };
   },
 };

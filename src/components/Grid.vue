@@ -8,4 +8,7 @@
 .grid {
   display: flex;
 }
+.grid.column {
+  flex-direction: column;
+}
 </style>
